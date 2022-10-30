@@ -12,9 +12,9 @@ class App extends React.Component {
             super();
             this.state = {
                 items : [
-                    {id: 1, label: 'Learn React'},
-                    {id: 2, label: 'Learn Redux'},
-                    {id: 3, label: 'Learn JS'},
+                    {id: 1, label: 'Learn React', done: false, mark: true},
+                    {id: 2, label: 'Learn Redux', done: false, mark: false},
+                    {id: 3, label: 'Learn JS', done: false, mark: false},
                 ],
                 searchText: ''
             }
@@ -42,7 +42,7 @@ id = 4
 
         onAddItem = (label) => {
             this.setState((state) => {
-                const item = {id: ++this.id, label: label}
+                const item = {id: ++this.id, label: label, done: false, mark: false}
                 return {
                     items: [...state.items, item]
                 }
@@ -51,7 +51,7 @@ id = 4
 
 
     onSearchChange = (search) => {
-        if (search.lenght === 0) {
+        if (search.length === 0) {
             return this.state.items
         }
 
@@ -60,15 +60,30 @@ id = 4
         })
     }
 
+    onToggleDone = (done) => {
 
 
+        this.setState((state) => {
+            console.log(state.done)
+            return {
+                   done: !state.done
+            }
+        })
+    }
 
+    onMark = (mark) => {
+        this.setState((state) => {
+            console.log(state.mark)
+            return {
+                mark: !state.mark
+            }
+        })
+    }
 
 
 
 
    render () {
-
           const visibleItems = this.onSearchChange(this.state.searchText)
 
        return (
@@ -79,6 +94,8 @@ id = 4
 
                    <ItemStatusFilter />
                    <TodoList items={visibleItems}
+                             onToggleDone = {(done) => this.onToggleDone(done)}
+                             onMark = {(mark) => this.onMark()}
                              onRemove={(id) => this.onRemove(id)}/>
                    <ItemAddForm onAddItem={this.onAddItem}/>
                </section>

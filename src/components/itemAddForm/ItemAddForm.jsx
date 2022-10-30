@@ -6,11 +6,13 @@ import React, {Component} from "react";
 class ItemAddForm extends Component {
 
     state = {
-        label: ''
+        label: '',
+
     }
     onLabelChange = (e) => {
         this.setState({
-            label: e.target.value
+            label: e.target.value,
+
         })
     }
     onSubmit = (e) => {
@@ -18,7 +20,8 @@ class ItemAddForm extends Component {
         const {label} = this.state
         this.props.onAddItem(label)
         this.setState( {
-            label: ''
+            label: '',
+
         })
 
     }

@@ -4,47 +4,28 @@ import './todoListItem.css';
 
 class TodoListItem extends React.Component {
 
-    state = {
-        done: false,
-        mark: false
-    }
 
-    onToggleDone = () => {
-        this.setState((state) => {
-            return {
-                done: !state.done
-            }
-        })
-    }
-    onMark = () => {
-        this.setState((state) => {
-            return {
-                mark: !state.mark
-            }
-        })
-    }
+
+
 
 
     render() {
-        const {done, mark} = this.state
-
+console.log(this.props )
+        const {done, mark} = this.props
         let styleMark = 'item'
-
         if (done) {
-            styleMark += ' done'
-        }
+            styleMark += ' done'}
         if (mark) {
-            styleMark += ' mark'
-        }
+            styleMark += ' mark'}
 
 
         return (
-            <div>
-            <span className={styleMark} onClick={this.onToggleDone}>
+            <div >
+            <span className ={styleMark} onClick={this.props.onToggleDone}>
                 {this.props.label}
-            </span>
+            </span  >
                 <button onClick={this.props.onRemove}>D</button>
-                <button onClick={this.onMark}>!</button>
+                <button onClick={this.props.onMark}>!</button>
             </div>)
 
     }
